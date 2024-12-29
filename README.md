@@ -8,17 +8,33 @@ I'm planning to add the ARM32/64 building feature, which may be more wanted.
 
 Usage: firstly, create `artifacts/` directory in the top level of this repository. Then, git-clone or download or create a directory that contains PKGBUILD in the same level. Then, just run this script with name of the directory. The built packages are saved in `artifacts/` directory.
 
-Example: `git clone https://aur.archlinux.org/mozc-ut.git && ./docker-arch.bash mozc-ut`
+Example:
+```bash
+git clone https://aur.archlinux.org/mozc-ut.git && \
+./docker-arch.bash mozc-ut
+```
 
 ## `docker-arch-with-req.bash`
 
 Usage: same as `docker-arch.bash`, but you can specify prerequisite packages after the second arguments (as the file names in `artifacts/` directory). The first argument is the directory name of the package to be built.
 
-Example: `git clone https://aur.archlinux.org/mozc-ut.git && git clone https://aur.archlinux.org/fcitx5-mozc-ut.git && ./docker-arch.bash mozc-ut && ./docker-arch-with-req.bash fcitx5-mozc-ut 'mozc-ut-<the version name you found in the artifacts directory>-x86_64.pkg.tar.zst'`
+Example:
+```bash
+git clone https://aur.archlinux.org/mozc-ut.git && \
+git clone https://aur.archlinux.org/fcitx5-mozc-ut.git && \
+./docker-arch.bash mozc-ut
+
+ls ./artifacts # look for the latest build files
+
+./docker-arch-with-req.bash fcitx5-mozc-ut 'mozc-ut-<the version you found in the artifacts directory>-x86_64.pkg.tar.zst'
+```
 
 ## `docker-arch-makepkg-g.bash`
 
 Usage: Run `makepkg -g` (which is the command to calculate hashes for all the downloaded files), rewriting the current `PKGBUILD`. Please provide directory name of the package. The first argument is the directory name of the package to be built.
 
-Example: `./docker-arch-makepkg-g.bash mypackagename`
+Example:
+```bash
+./docker-arch-makepkg-g.bash mypackagename
+```
 
