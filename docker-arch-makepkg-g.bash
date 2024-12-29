@@ -2,7 +2,7 @@
 
 set -eu -o pipefail
 
-PKGNAME="${1//\//}"
+PKGNAME="$(basename "$1")"
 
 pushd build-scripts
 
