@@ -2,6 +2,8 @@
 
 set -eu -o pipefail
 
+PKGNAME="${1//\//}"
+
 pushd build-scripts
 
 docker build -t arch-amd64-builds .
@@ -9,10 +11,10 @@ docker build -t arch-amd64-builds .
 docker run \
   -t \
   --rm \
-  -v "$(pwd)/../$1:/sourcedata" \
+  -v "$(pwd)/../$PKGNAME:/sourcedata" \
   -v "$(pwd):/build-scripts" \
   arch-amd64-builds \
-  /bin/bash -c "cd /build-scripts && ./console.sh \"bash -c 'makepkg -g >> PKGBUILD'\""
+  /build-scripts/console.bash "makepkg -g >> PKGBUILD"
 
 popd
 
