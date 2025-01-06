@@ -7,12 +7,12 @@ PKGNAME="$(basename "$1")"
 rm -rf "$(pwd)/$PKGNAME-build"
 mkdir "$(pwd)/$PKGNAME-build"
 
-if [ "$CLEAN" == "1" ]; then
 pushd "$PKGNAME"
 git pull
+if [ "$CLEAN" == "1" ]; then
 git clean -dfx
-popd
 fi
+popd
 
 pushd build-scripts
 
@@ -33,9 +33,9 @@ popd
 
 rm -rf "$(pwd)/$PKGNAME-build"
 
-if [ "$CLEAN" == "1" ]; then
 pushd "$PKGNAME"
 git pull
+if [ "$CLEAN" == "1" ]; then
 git clean -dfx
-popd
 fi
+popd
