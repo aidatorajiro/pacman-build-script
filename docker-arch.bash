@@ -1,16 +1,18 @@
 #!/bin/bash
 
-set -eu -o pipefail
+set -eo pipefail
 
 PKGNAME="$(basename "$1")"
 
 rm -rf "$(pwd)/$PKGNAME-build"
 mkdir "$(pwd)/$PKGNAME-build"
 
+if [ "$CLEAN" == "1" ]; then
 pushd "$PKGNAME"
 git pull
 git clean -dfx
 popd
+fi
 
 pushd build-scripts
 
@@ -25,13 +27,15 @@ docker run \
   arch-amd64-builds \
   /build-scripts/build.bash
 
-cp ../"$PKGNAME"/*.pkg.tar.* ../artifacts
+mv ../"$PKGNAME"/*.pkg.tar.* ../artifacts
 
 popd
 
 rm -rf "$(pwd)/$PKGNAME-build"
 
+if [ "$CLEAN" == "1" ]; then
 pushd "$PKGNAME"
 git pull
 git clean -dfx
 popd
+fi
